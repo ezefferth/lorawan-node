@@ -22,11 +22,9 @@
 #endif
 
 #define LORAWAN_UPLINK_USER_PORT  2
-#define LORAWAN_UPLINK_DATA_RATE  3
-
-#define LORAWAN_UPLINK_PERIOD     10000 // ms
-
-#define LORAWAN_UPLINK_DATA_MAX   115 // byte
+#define LORAWAN_UPLINK_DATA_RATE  4
+#define LORAWAN_UPLINK_PERIOD     200 // ms
+#define LORAWAN_UPLINK_DATA_MAX   222 // byte
 
 
 // result code to text ...
