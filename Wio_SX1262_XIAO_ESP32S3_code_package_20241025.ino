@@ -33,21 +33,7 @@ const unsigned long DURACAO_COLETA = 30000;  // 30 segundos
 const unsigned long INTERVALO_ENVIO = 200;   // a cada 0.2 segundos
 const unsigned long PAUSA_FINAL = 60000;     // 1 minuto
 
-String decodeErro(int16_t code) {
-  switch (code) {
-    case RADIOLIB_ERR_NONE: return "Nenhum erro";
-    case RADIOLIB_LORAWAN_NO_DOWNLINK: return "Sem downlink (esperado)";
-    case RADIOLIB_ERR_TX_TIMEOUT: return "Timeout de transmissão";
-    // case RADIOLIB_ERR_NO_ACK: return "Sem ACK";
-    case RADIOLIB_ERR_INVALID_BANDWIDTH: return "Largura de banda inválida";
-    case RADIOLIB_ERR_SPI_WRITE_FAILED: return "Falha SPI na escrita";
-    // case RADIOLIB_ERR_SPI_READ_FAILED: return "Falha SPI na leitura";
-    // case RADIOLIB_ERR_INVALID_PARAM: return "Parâmetro inválido";
-    case RADIOLIB_ERR_PACKET_TOO_LONG: return "Pacote muito longo";
-    default:
-      return "Erro desconhecido: " + String(code);
-  }
-}
+
 
 void setup() {
   Serial.begin(115200);
@@ -109,7 +95,7 @@ void loop() {
       if (status == RADIOLIB_ERR_NONE || status == RADIOLIB_LORAWAN_NO_DOWNLINK) {
         Serial.printf("📤 Pacote [%d-%d] enviado com sucesso\n", indiceEnvio, indiceEnvio + blocos - 1);
       } else {
-        Serial.printf("❌ Erro ao enviar pacote [%d-%d]: %s\n", indiceEnvio, indiceEnvio + blocos - 1, decodeErro(status).c_str());
+        Serial.printf("❌ Erro ao enviar pacote [%d-%d]: %s\n", indiceEnvio, indiceEnvio + blocos - 1, stateDecode(status).c_str());
       }
 
       indiceEnvio += blocos;
